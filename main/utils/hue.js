@@ -72,9 +72,9 @@ const setLightColor = async (event, color, lightId) => {
           parseRgbColor(color)[2],
         );
 
-    light.brightness = random(50, 150);
+    light.brightness = random(1, 2);
     light.xy = lightColor;
-    light.transitionTime = random(0, 0.6);
+    light.transitionTime = 1;
     client.lights.save(light);
   };
 
