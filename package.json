@@ -1,6 +1,6 @@
 {
   "name": "electron-next-skeleton",
-  "productName": "ElectronNext",
+  "productName": "Hue Desktop",
   "version": "1.0.0",
   "main": "main/index.js",
   "license": "MIT",
@@ -29,6 +29,10 @@
     "app-root-path": "2.0.1",
     "electron-is-dev": "0.3.0",
     "electron-next": "3.1.1",
-    "extract-screen-colors": "^1.0.1"
+    "electron-settings": "^3.1.1",
+    "extract-screen-colors": "^1.0.1",
+    "huejay": "^1.7.0",
+    "lodash": "^4.17.4",
+    "menubar": "^5.2.3"
   }
 }

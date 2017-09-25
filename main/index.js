@@ -7,33 +7,54 @@ const isDev = require("electron-is-dev");
 const prepareNext = require("electron-next");
 const { resolve } = require("app-root-path");
 const extractScreenColors = require("extract-screen-colors");
+const {
+  setEventListeners: setHueEventListeners,
+  loadClientFromStorage,
+} = require("./utils/hue");
+
+const getScreenColors = async (event, arg) => {
+  const colors = await extractScreenColors();
+  event.sender.send("set-screen-colors", colors);
+};
 
 // Prepare the renderer once the app is ready
 app.on("ready", async () => {
   await prepareNext("./renderer");
 
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-  });
+  function showConnectWindow(fn, options = {}) {
+    const devPath = "http://localhost:8000/hue-connect";
 
-  const devPath = "http://localhost:8000/start";
+    const prodPath = format({
+      pathname: resolve("renderer/out/hue-connect/index.html"),
+      protocol: "file:",
+      slashes: true,
+    });
 
-  const prodPath = format({
-    pathname: resolve("renderer/out/start/index.html"),
-    protocol: "file:",
-    slashes: true,
-  });
+    const url = isDev ? devPath : prodPath;
 
-  const url = isDev ? devPath : prodPath;
-  mainWindow.loadURL(url);
+    const connectHueWindow = new BrowserWindow({
+      width: 400,
+      height: 450,
+      resizable: false,
+      vibrancy: "light",
+      minimizable: false,
+      maximizable: false,
+      frame: false,
+      transparent: true,
+      titleBarStyle: "hidden-inset",
+      "web-preferences": {
+        "web-security": false,
+      },
+    });
 
-  ipcMain.on("get-screen-colors", (event, arg) => {
-    console.log(arg);
-    extractScreenColors().then(colors =>
-      event.sender.send("set-screen-colors", colors),
-    );
-  });
+    connectHueWindow.loadURL(url);
+  }
+
+  ipcMain.on("get-screen-colors", getScreenColors);
+
+  showConnectWindow();
+  setHueEventListeners();
+  loadClientFromStorage();
 });
 
 // Quit the app once all windows are closed
