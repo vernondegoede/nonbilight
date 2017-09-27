@@ -1,4 +1,4 @@
-const huejay = require("huejay");
+
 const { ipcMain } = require("electron");
 const settings = require("electron-settings");
 const { random } = require("lodash");
