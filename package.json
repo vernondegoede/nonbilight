@@ -1,10 +1,10 @@
 {
-  "name": "electron-next-skeleton",
-  "productName": "Hue Desktop",
+  "name": "nonbilight",
+  "productName": "Nonbilight",
   "version": "1.0.0",
   "main": "main/index.js",
   "license": "MIT",
-  "repository": "leo/electron-next-skeleton",
+  "repository": "vernondegoede/nonbilight",
   "scripts": {
     "start": "electron .",
     "build": "next build renderer && next export renderer",
