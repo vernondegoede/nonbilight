@@ -3,18 +3,18 @@ const { resolve } = require("app-root-path");
 const { format } = require("url");
 const isDev = require("electron-is-dev");
 
-function loadMainWindow(fn, options = {}) {
-  const devPath = "http://localhost:8000/main";
+function loadArrowWindow(fn, options = {}) {
+  const devPath = "http://localhost:8000/arrow";
 
   const prodPath = format({
-    pathname: resolve("renderer/out/main/index.html"),
+    pathname: resolve("renderer/out/main/arrow.html"),
     protocol: "file:",
     slashes: true,
   });
 
   const url = isDev ? devPath : prodPath;
 
-  const mainWindow = new BrowserWindow({
+  const arrowWindow = new BrowserWindow({
     width: 260,
     height: 285,
     resizable: false,
@@ -22,6 +22,7 @@ function loadMainWindow(fn, options = {}) {
     fullscreenable: false,
     maximizable: false,
     minimizable: false,
+    transparent: true,
     frame: false,
     movable: false,
     title: "Nonbilight",
@@ -30,9 +31,9 @@ function loadMainWindow(fn, options = {}) {
     },
   });
 
-  mainWindow.loadURL(url);
+  arrowWindow.loadURL(url);
 
-  return mainWindow;
+  return arrowWindow;
 }
 
-module.exports = loadMainWindow;
+module.exports = loadArrowWindow;

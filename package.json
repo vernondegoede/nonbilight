@@ -27,13 +27,20 @@
   },
   "dependencies": {
     "app-root-path": "2.0.1",
+    "chroma-js": "^1.3.4",
+    "decibel-meter": "^2.0.0",
     "desktop-screenshot": "^0.1.1",
     "electron-is-dev": "0.3.0",
     "electron-next": "3.1.1",
     "electron-settings": "^3.1.1",
     "extract-screen-colors": "^1.0.1",
+    "get-pixels": "^3.3.0",
+    "get-rgba-palette": "^2.0.1",
+    "get-svg-colors": "^1.3.0",
     "huejay": "^1.7.0",
+    "just-compare": "^1.2.0",
     "lodash": "^4.17.4",
-    "menubar": "^5.2.3"
+    "menubar": "^5.2.3",
+    "pify": "^3.0.0"
   }
 }

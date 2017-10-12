@@ -3,7 +3,8 @@ const { ipcMain } = require("electron");
 const settings = require("electron-settings");
 const { random } = require("lodash");
 
-const colors = require("./colors");
+const colors = require("./../../renderer/utils/colors");
+const huejay = require('huejay');
 
 let client;
 
