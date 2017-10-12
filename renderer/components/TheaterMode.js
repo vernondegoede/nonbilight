@@ -37,7 +37,7 @@ class TheaterMode extends Component {
 
   initScreenObserver() {
     const screenshot = this.props.remote.require("desktop-screenshot");
-    const getColors = this.props.remote.require("./utils/getImageColors");
+    const getColors = this.props.remote.require("get-image-colors");
     const app = this.props.remote.app;
     const pathName = app.getPath("temp") + "screenshot.png";
 
@@ -59,6 +59,7 @@ class TheaterMode extends Component {
     this.watchScreenInterval = setInterval(() => {
       screenshot(pathName, {});
     }, 500);
+    readScreenColors();
   }
 
   getEncodedScreenshot() {
