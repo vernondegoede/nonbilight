@@ -6,6 +6,7 @@ import { random } from "lodash";
 
 // Components
 import TheaterMode from "./../components/TheaterMode";
+import ManualMode from "./../components/ManualMode";
 import Tabs from "./../components/Tabs";
 
 // Utils
@@ -29,6 +30,7 @@ export default class extends Component {
 
     this.remote = electron.remote || false;
     this.switchMultipleLights = this.switchMultipleLights.bind(this);
+    this.setActiveTab = this.setActiveTab.bind(this);
   }
 
   async componentDidMount() {
@@ -94,6 +96,12 @@ export default class extends Component {
     });
   }
 
+  setActiveTab(activeTab) {
+    this.setState({
+      activeTab,
+    });
+  }
+
   switchMultipleLights(colors) {
     const callback = () => this.setLightColors();
     this.setState(
@@ -116,6 +124,8 @@ export default class extends Component {
     switch (activeTab) {
       case THEATER_MODE:
         return <TheaterMode {...childProps} />;
+      case MANUAL_MODE:
+        return <ManualMode {...childProps} />;
     }
   }
 
@@ -126,7 +136,11 @@ export default class extends Component {
     return (
       <div>
         <main>
-          <Tabs tabs={TABS} activeTab={activeTab} />
+          <Tabs
+            tabs={TABS}
+            activeTab={activeTab}
+            onSwitchTab={this.setActiveTab}
+          />
           <div className="main">
             {isConnected ? content : <h1>Please connect</h1>}
           </div>

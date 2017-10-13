@@ -17,21 +17,32 @@ class TheaterMode extends Component {
 
   componentWillReceiveProps({ client }) {
     // Wait until bridge is connected and lights found
-    if (!this.state.client && client) {
-      this.setState(
-        {
-          client,
-        },
-        () => {
-          this.initScreenObserver();
-        },
-      );
+    if (!this.state.client && client && !this.watchScreenInterval) {
+      this.startListeners(client);
     }
   }
 
   componentWillUnmount() {
     if (this.watchScreenInterval) {
       clearInterval(this.watchScreenInterval);
+      this.watchScreenInterval = null;
+    }
+  }
+
+  startListeners(client) {
+    this.setState(
+      {
+        client,
+      },
+      () => {
+        this.initScreenObserver();
+      },
+    );
+  }
+
+  componentDidMount() {
+    if (this.props.client && !this.watchScreenInterval) {
+      this.startListeners(this.props.client);
     }
   }
 
@@ -42,7 +53,7 @@ class TheaterMode extends Component {
     const pathName = app.getPath("temp") + "screenshot.png";
 
     const readScreenColors = async () => {
-      if (!this.state.client) {
+      if (!this.state.client || !this.watchScreenInterval) {
         return false;
       }
 
@@ -57,6 +68,7 @@ class TheaterMode extends Component {
     };
 
     this.watchScreenInterval = setInterval(() => {
+      console.log("Taking screenshot");
       screenshot(pathName, {});
     }, 500);
     readScreenColors();

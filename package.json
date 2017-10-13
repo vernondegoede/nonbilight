@@ -41,6 +41,7 @@
     "just-compare": "^1.2.0",
     "lodash": "^4.17.4",
     "menubar": "^5.2.3",
-    "pify": "^3.0.0"
+    "pify": "^3.0.0",
+    "react-color": "^2.13.8"
   }
 }
