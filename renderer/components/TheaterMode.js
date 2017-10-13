@@ -68,9 +68,8 @@ class TheaterMode extends Component {
     };
 
     this.watchScreenInterval = setInterval(() => {
-      console.log("Taking screenshot");
       screenshot(pathName, {});
-    }, 500);
+    }, 250);
     readScreenColors();
   }
 

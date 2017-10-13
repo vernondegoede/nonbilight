@@ -91,9 +91,11 @@ export default class extends Component {
       const hueLight = await this.state.client.lights.getById(
         lightReference.attributes.attributes.id,
       );
+
       hueLight.xy = CIE1931ColorValue;
-      hueLight.brightness = this.state.brightness;
-      hueLight.transitionTime = 1;
+      hueLight.brightness = Math.floor(this.state.brightness);
+      hueLight.transitionTime = .5;
+
       this.state.client.lights.save(hueLight);
     });
   }
@@ -105,8 +107,6 @@ export default class extends Component {
   }
 
   switchMultipleLights(color, brightness) {
-    console.log('brightness', brightness);
-
     const callback = () => this.setLightColors();
     this.setState(
       {

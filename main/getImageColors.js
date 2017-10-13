@@ -88,6 +88,12 @@ function paletteFromBitmap(filename, type, callback) {
 
     const color = palette[0];
 
+    if (!color) {
+      return {
+        color: [0, 0, 0],
+        brightness: 0,
+      };
+    }
     // If computed average below darkness threshold, set to the threshold
     if (
       color._rgb[0] <= LOW_THRESHOLD &&
