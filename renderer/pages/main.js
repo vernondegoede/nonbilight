@@ -24,7 +24,8 @@ export default class extends Component {
     this.state = {
       isConnected: true,
       activeTab: THEATER_MODE,
-      colors: [],
+      color: false,
+      brightness: 0,
       client: null,
     };
 
@@ -84,13 +85,14 @@ export default class extends Component {
 
   async setLightColors() {
     this.state.lights.map(async (lightReference, index) => {
-      const correspondingColor = this.state.colors[index].rgb();
+      const correspondingColor = this.state.color.rgb();
       const CIE1931ColorValue = colorUtils.rgbToCIE1931(...correspondingColor);
 
       const hueLight = await this.state.client.lights.getById(
         lightReference.attributes.attributes.id,
       );
       hueLight.xy = CIE1931ColorValue;
+      hueLight.brightness = this.state.brightness;
       hueLight.transitionTime = 1;
       this.state.client.lights.save(hueLight);
     });
@@ -102,23 +104,26 @@ export default class extends Component {
     });
   }
 
-  switchMultipleLights(colors) {
+  switchMultipleLights(color, brightness) {
+    console.log('brightness', brightness);
+
     const callback = () => this.setLightColors();
     this.setState(
       {
-        colors,
+        color,
+        brightness,
       },
       callback,
     );
   }
 
   renderTabContents() {
-    const { activeTab, colors } = this.state;
+    const { activeTab, color } = this.state;
     const childProps = {
       remote: this.remote,
       switchMultipleLights: this.switchMultipleLights,
       client: this.state.client,
-      colors,
+      color,
     };
 
     switch (activeTab) {

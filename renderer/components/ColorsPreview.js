@@ -2,19 +2,20 @@ import { colorPreviewStyles } from "./../styles/components/ColorsPreview";
 
 const parseDisplayRgbValue = values => `rgba(${values.join(",")})`;
 
-export default ({ colors }) => (
+export default ({ color }) => (
   <div>
-    <div className="colors-preview">
-      {colors.map(({ _rgb }) => (
+    {color && (
+      <div className="colors-preview">
+        {console.log("color in preview", color)}
         <div
-          key={_rgb}
+          key={color._rgb}
           className="colors-preview__item"
           style={{
-            backgroundColor: parseDisplayRgbValue(_rgb),
+            backgroundColor: parseDisplayRgbValue(color._rgb),
           }}
         />
-      ))}
-    </div>
+      </div>
+    )}
     <style jsx>{colorPreviewStyles}</style>
   </div>
 );

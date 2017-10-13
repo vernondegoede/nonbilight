@@ -7,7 +7,7 @@ export const colorPreviewStyles = `
     }
 
     .colors-preview__item {
-        width: 36px;
+        width: 100%;
         height: 16px;
         border-radius: 4px;
         border: 1px solid rgba(0, 0, 0, .1);

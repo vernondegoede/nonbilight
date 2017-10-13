@@ -8,7 +8,7 @@ class TheaterMode extends Component {
     super(props);
 
     this.state = {
-      colors: [],
+      color: [],
       client: null,
     };
 
@@ -48,7 +48,7 @@ class TheaterMode extends Component {
 
   initScreenObserver() {
     const screenshot = this.props.remote.require("desktop-screenshot");
-    const getColors = this.props.remote.require("get-image-colors");
+    const getColors = this.props.remote.require("./getImageColors");
     const app = this.props.remote.app;
     const pathName = app.getPath("temp") + "screenshot.png";
 
@@ -58,8 +58,8 @@ class TheaterMode extends Component {
       }
 
       try {
-        const colors = await getColors(pathName);
-        this.props.switchMultipleLights(colors);
+        const { color, brightness } = await getColors(pathName);
+        this.props.switchMultipleLights(color, brightness);
       } catch (err) {
         console.log("Something weird happened 🤔", err);
       } finally {
@@ -89,7 +89,7 @@ class TheaterMode extends Component {
   }
 
   render() {
-    const { colors } = this.props;
+    const { color } = this.props;
     const lastScreenshot = this.getEncodedScreenshot();
 
     return (
@@ -100,7 +100,7 @@ class TheaterMode extends Component {
             src={"data:image/png;base64," + lastScreenshot}
           />
         )}
-        <ColorsPreview colors={colors} />
+        <ColorsPreview color={color} />
         <style jsx>{theaterModeStyles}</style>
       </div>
     );
