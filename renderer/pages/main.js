@@ -23,7 +23,7 @@ export default class extends Component {
 
     this.state = {
       isConnected: true,
-      activeTab: THEATER_MODE,
+      activeTab: MANUAL_MODE,
       color: false,
       brightness: 0,
       client: null,
@@ -94,7 +94,8 @@ export default class extends Component {
 
       hueLight.xy = CIE1931ColorValue;
       hueLight.brightness = Math.floor(this.state.brightness);
-      hueLight.transitionTime = .5;
+      hueLight.transitionTime = 0.5;
+      hueLight.ct = 153;
 
       this.state.client.lights.save(hueLight);
     });

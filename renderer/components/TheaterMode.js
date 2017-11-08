@@ -67,21 +67,32 @@ class TheaterMode extends Component {
       }
     };
 
-    this.watchScreenInterval = setInterval(() => {
-      screenshot(pathName, {});
-    }, 250);
+    const takeScreenshot = async () => {
+      this.watchScreenInterval = true;
+      screenshot(pathName, {}, (error, complete) => {
+        if (complete) {
+          setTimeout(() => takeScreenshot(), 100);
+        }
+      });
+    };
+
+    takeScreenshot();
     readScreenColors();
   }
 
   getEncodedScreenshot() {
     let absoluteScreenshotPath;
 
-    if (this.props.remote) {
-      const fs = this.props.remote.require("fs");
-      absoluteScreenshotPath =
-        this.props.remote.app.getPath("temp") + "screenshot.png";
-      const bitmap = fs.readFileSync(absoluteScreenshotPath);
-      return new Buffer(bitmap).toString("base64");
+    try {
+      if (this.props.remote) {
+        const fs = this.props.remote.require("fs");
+        absoluteScreenshotPath =
+          this.props.remote.app.getPath("temp") + "screenshot.png";
+        const bitmap = fs.readFileSync(absoluteScreenshotPath);
+        return new Buffer(bitmap).toString("base64");
+      }
+    } catch (error) {
+      console.error("Could not read screenshot.", error);
     }
 
     return false;

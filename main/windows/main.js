@@ -27,6 +27,7 @@ function loadMainWindow(fn, options = {}) {
     title: "Nonbilight",
     "web-preferences": {
       "web-security": false,
+      backgroundThrottling: false,
     },
   });
 
