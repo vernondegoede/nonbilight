@@ -19,11 +19,11 @@
   },
   "devDependencies": {
     "electron": "^1.7.11",
-    "electron-builder": "19.22.1",
+    "electron-builder": "20.10.0",
     "electron-rebuild": "^1.6.0",
-    "next": "3.0.6",
-    "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "next": "5.1.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2"
   },
   "dependencies": {
     "app-root-path": "2.0.1",
@@ -31,7 +31,7 @@
     "decibel-meter": "^2.0.0",
     "desktop-screenshot": "^0.1.1",
     "electron-is-dev": "0.3.0",
-    "electron-next": "3.1.1",
+    "electron-next": "3.1.4",
     "electron-settings": "^3.1.1",
     "extract-screen-colors": "^1.0.1",
     "get-pixels": "^3.3.0",
