@@ -14,6 +14,8 @@
 <br>
 
 ## ⚡️ Contribute
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/vernondegoede/nonbilight.svg)](https://greenkeeper.io/)
 This app is developed by the same people who are using it. If you are one of them (actually... us) and want to make our app even better, you're more than welcome to contribute.
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account.
